@@ -33,12 +33,8 @@
 			</view>
 		</view>
 		<view class="item-tool-box">
-			<view class="tool-item left" bindtap="onModify"
-			 data-index="{{ index }}"
-			 data-id="{{ item.id }}">编辑</view>
-			<view class="tool-item" bindtap="onRemove"
-			 data-index="{{ index }}"
-			 data-id="{{ item.id }}">删除</view>
+			<view class="tool-item left" bindtap="onModify" data-index="{{ index }}" data-id="{{ item.id }}">编辑</view>
+			<view class="tool-item" bindtap="onRemove" data-index="{{ index }}" data-id="{{ item.id }}">删除</view>
 		</view>
 	</view>
 </view>

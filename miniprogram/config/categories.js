@@ -1,5 +1,4 @@
-export const categories =  [
-  {
+export const categories = [{
     name: '默认',
     icon: '/images/icon_default.png',
   },

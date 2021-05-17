@@ -4,9 +4,13 @@ Page({
     src: '',
   },
   onLoad(options) {
-    const { src } = options
+    const {
+      src
+    } = options
     if (src) {
-      this.setData({ src: decodeURIComponent(src) })
+      this.setData({
+        src: decodeURIComponent(src)
+      })
     } else {
       wx.navigateBack()
     }

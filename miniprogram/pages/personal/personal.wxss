@@ -1,10 +1,12 @@
 page {
   background-color: #f2f2f2;
 }
+
 .wrapper {
   padding: 12px;
   background-color: #f2f2f2;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -13,27 +15,33 @@ page {
   background-color: var(--weui-BRAND);
   color: var(--weui-WHITE);
 }
+
 .header-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .header-icon {
   width: 40px;
   height: 40px;
 }
+
 .card {
   background-color: var(--weui-WHITE);
   border-radius: 8px;
 }
+
 .card-header {
   color: var(--weui-FG-1);
   padding: 16px;
 }
+
 .card-row {
   display: flex;
   border-top: 1px solid #f2f2f2;
 }
+
 .card-cell {
   position: relative;
   width: 33.33%;
@@ -41,11 +49,13 @@ page {
   flex-shrink: 0;
   border-right: 1px solid #f2f2f2;
 }
+
 .card-cell::before {
   content: "";
   display: block;
   padding-top: 100%;
 }
+
 .cell-content {
   position: absolute;
   top: 0;
@@ -59,13 +69,16 @@ page {
   align-items: center;
   overflow: hidden;
 }
+
 .cell-content:active {
   background-color: var(--weui-FG-3);
 }
+
 .card-icon {
   width: 32px;
   height: 32px;
 }
+
 .card-desc {
   background-color: var(--weui-RED);
   font-size: 12px;

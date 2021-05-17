@@ -1,6 +1,8 @@
 import './db/index'
 import dbUsers from './db/users'
-import { categoriesName } from './config/categories'
+import {
+  categoriesName
+} from './config/categories'
 
 App({
   globalData: {},
@@ -9,7 +11,7 @@ App({
     add(name, callback) {
       if (!Array.isArray(this.events[name])) {
         this.events[name] = []
-      } 
+      }
       this.events[name].push(callback)
     },
     remove(name, callback) {
@@ -40,7 +42,10 @@ App({
   async appReady() {
     return dbUsers.getByOpenId()
       .then(res => {
-        const { code, data }= res
+        const {
+          code,
+          data
+        } = res
         if (code === 0) {
           if (data) {
             this.globalData.userInfo = data
@@ -55,9 +60,14 @@ App({
       })
   },
   addUser() {
-    return dbUsers.add({ createdAt: Date.now() })
+    return dbUsers.add({
+        createdAt: Date.now()
+      })
       .then((res) => {
-        const { code, data } = res
+        const {
+          code,
+          data
+        } = res
         if (code === 0) {
           this.globalData.userInfo = data
           return data

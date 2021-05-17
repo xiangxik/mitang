@@ -1,11 +1,8 @@
 <view wx:if="{{ inited }}">
   <view class="image-box mt-16">
-    <image class="image"
-     wx:if="{{ status === 2 }}" src="/images/icon_done.png"></image>
-    <image class="image"
-     wx:if="{{ status === 1 }}" src="/images/icon_wait.png"></image>
-    <image class="image"
-     wx:if="{{ status === -1 }}" src="/images/icon_sad.png"></image> 
+    <image class="image" wx:if="{{ status === 2 }}" src="/images/icon_done.png"></image>
+    <image class="image" wx:if="{{ status === 1 }}" src="/images/icon_wait.png"></image>
+    <image class="image" wx:if="{{ status === -1 }}" src="/images/icon_sad.png"></image>
   </view>
 
   <view class="status-text mt-16">

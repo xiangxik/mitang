@@ -20,27 +20,47 @@ Page({
   },
   onLoad(options) {
     // mode值：set, confirm, change, 默认set
-    const { mode } = options
+    const {
+      mode
+    } = options
     app.$ready.then(res => {
-      const { sign } = res
-      if (!sign) { // 从没设置过主密码
-        this.setData({ mode: 'set' })
-        wx.setNavigationBarTitle({ title: '设置主密码' })
-      } else if (mode === 'change') {
-        this.setData({ mode: 'change' })
-        wx.setNavigationBarTitle({ title: '更改主密码' })
-      } else {
-        this.setData({ mode: 'confirm' })
-        wx.setNavigationBarTitle({ title: '校验主密码' })
-      }
-      this.init()
-    })
-    .catch(() => {
-      wx.showToast({ title: '数据初始化错误, 请退出重试' })
-    })
+        const {
+          sign
+        } = res
+        if (!sign) { // 从没设置过主密码
+          this.setData({
+            mode: 'set'
+          })
+          wx.setNavigationBarTitle({
+            title: '设置主密码'
+          })
+        } else if (mode === 'change') {
+          this.setData({
+            mode: 'change'
+          })
+          wx.setNavigationBarTitle({
+            title: '更改主密码'
+          })
+        } else {
+          this.setData({
+            mode: 'confirm'
+          })
+          wx.setNavigationBarTitle({
+            title: '校验主密码'
+          })
+        }
+        this.init()
+      })
+      .catch(() => {
+        wx.showToast({
+          title: '数据初始化错误, 请退出重试'
+        })
+      })
   },
   init() {
-    const { mode } = this.data
+    const {
+      mode
+    } = this.data
     if (mode === 'change') {
       this.setData({
         firstKeyTitle: '原密码',
@@ -49,35 +69,59 @@ Page({
     }
   },
   onInput(e) {
-    const { value } = e.detail
-    this.setData({ firstKey: value })
+    const {
+      value
+    } = e.detail
+    this.setData({
+      firstKey: value
+    })
   },
   onSecondKeyInput(e) {
-    const { value } = e.detail
-    this.setData({ secondKey: value })
+    const {
+      value
+    } = e.detail
+    this.setData({
+      secondKey: value
+    })
   },
   onIconTap() {
-    const { hide } = this.data
-    this.setData({ hide: !hide })
+    const {
+      hide
+    } = this.data
+    this.setData({
+      hide: !hide
+    })
   },
   onSecondKeyIconTap() {
-    const { secondKeyHide } = this.data
-    this.setData({ secondKeyHide: !secondKeyHide })
+    const {
+      secondKeyHide
+    } = this.data
+    this.setData({
+      secondKeyHide: !secondKeyHide
+    })
   },
   onCheckboxChange(e) {
-    const { value } = e.detail
-    this.setData({ checkbox: value })
+    const {
+      value
+    } = e.detail
+    this.setData({
+      checkbox: value
+    })
   },
   // 保存主密钥到本地
   saveKeyToLocalStorage(key) {
-    const { checkbox } = this.data
+    const {
+      checkbox
+    } = this.data
     if (checkbox.length > 0) {
       wx.setStorage({
         data: key,
         key: 'key',
       })
     } else {
-      wx.removeStorage({ key: 'key' })
+      wx.removeStorage({
+        key: 'key'
+      })
     }
   },
   // 返回上一页
@@ -97,23 +141,39 @@ Page({
   // 设置主密码
   setKey() {
     return app.$ready.then((res) => {
-      const {_id, sign } = res
+      const {
+        _id,
+        sign
+      } = res
       if (sign) return
-      const { firstKey } = this.data
+      const {
+        firstKey
+      } = this.data
       wx.showModal({
         title: '重要提醒',
         content: '主密码用于加解密数据，你必须牢记于心，忘记主密码后将无法恢复数据！',
-        success: ({ confirm }) => {
+        success: ({
+          confirm
+        }) => {
           if (confirm) {
             const hash = SHA256(firstKey)
-            wx.showLoading({ title: '数据保存中...' })
-            dbUsers.update(_id, { sign: hash })
+            wx.showLoading({
+              title: '数据保存中...'
+            })
+            dbUsers.update(_id, {
+                sign: hash
+              })
               .then(res => {
                 wx.hideLoading()
-                const { code } = res
+                const {
+                  code
+                } = res
                 if (code === 0) {
                   app.globalData.key = firstKey
-                  wx.showToast({ title: '设置成功', mask: true })
+                  wx.showToast({
+                    title: '设置成功',
+                    mask: true
+                  })
                   setTimeout(() => {
                     this.goBackPage()
                   }, 1500)
@@ -121,7 +181,9 @@ Page({
               })
               .catch(() => {
                 wx.hideLoading()
-                wx.showToast({ title: '主密码设置失败' })
+                wx.showToast({
+                  title: '主密码设置失败'
+                })
               })
           }
         }
@@ -132,8 +194,15 @@ Page({
   resetEncryptList(oldKey, newKey, list) {
     const res = []
     list.forEach(item => {
-      const { _id, account, password, remark } = item
-      const d = { id: _id }
+      const {
+        _id,
+        account,
+        password,
+        remark
+      } = item
+      const d = {
+        id: _id
+      }
       if (account) {
         d.account = AES.encrypt(AES.decrypt(account, oldKey), newKey)
       }
@@ -149,15 +218,22 @@ Page({
   },
   // 更新云端数据
   async updateListForResetKey(list) {
-    wx.showLoading({ title: '数据保存中...', mask: true })
+    wx.showLoading({
+      title: '数据保存中...',
+      mask: true
+    })
 
-    for(let i = 0; i < list.length;) {
+    for (let i = 0; i < list.length;) {
       const item = list[i]
-      const { id } = item
+      const {
+        id
+      } = item
       item.updateAt = Date.now()
       delete item.id
       const res = await dbAccounts.update(id, item)
-      const { code } = res
+      const {
+        code
+      } = res
       if (code !== 0) { // 重试
         await dbAccounts.update(id, item)
       } else {
@@ -165,16 +241,25 @@ Page({
       }
     }
     wx.hideLoading()
-    wx.showToast({ title: '更新成功' })
+    wx.showToast({
+      title: '更新成功'
+    })
     return true
   },
   // 重置主密码
   resetKey() {
     return app.$ready.then(res => {
-      const { sign } = res
-      const { firstKey, secondKey } = this.data
+      const {
+        sign
+      } = res
+      const {
+        firstKey,
+        secondKey
+      } = this.data
       if (this.validKey(firstKey, sign)) {
-        wx.showLoading({ title: '数据准备中...' })
+        wx.showLoading({
+          title: '数据准备中...'
+        })
         this.countList({})
           .then(() => {
             this.loadList()
@@ -185,7 +270,9 @@ Page({
                 wx.showModal({
                   title: '重要提示',
                   content: '数据开始保存后，请勿终中断操作，否则可能丢失数据!',
-                  success: ({ confirm }) => {
+                  success: ({
+                    confirm
+                  }) => {
                     if (confirm) {
                       this.updateListForResetKey(newList)
                         .then(res => {
@@ -209,18 +296,22 @@ Page({
             wx.hideLoading()
           })
       } else {
-        wx.showToast({ title: '原密码不正确' })
+        wx.showToast({
+          title: '原密码不正确'
+        })
       }
     })
   },
   // 一次性加载所有数据
   async loadList() {
-    const { limit = 5, total } = this.data
+    const {
+      limit = 5, total
+    } = this.data
     let list = []
     let offset = 0
     if (total > 0) {
       const totalPage = Math.ceil(total / limit)
-      for(let i = 0; i < totalPage; i++) {
+      for (let i = 0; i < totalPage; i++) {
         offset = i * limit
 
         const data = await this.fetchList({}, offset, limit)
@@ -236,7 +327,10 @@ Page({
   fetchList(params, offset = 0, limit = 20) {
     return dbAccounts.get(params, offset, limit)
       .then(res => {
-        const { code, data } = res
+        const {
+          code,
+          data
+        } = res
         if (code === 0) return data
         return []
       })
@@ -246,9 +340,14 @@ Page({
   countList(params) {
     return dbAccounts.count(params)
       .then(res => {
-        const { code, data } = res
+        const {
+          code,
+          data
+        } = res
         if (code === 0) {
-          this.setData({ total: data.total })
+          this.setData({
+            total: data.total
+          })
           return data.total
         }
         return 0
@@ -258,9 +357,14 @@ Page({
   // 验证主密码
   confirmKey() {
     return app.$ready.then((res) => {
-      const { _openid, sign } = res
+      const {
+        _openid,
+        sign
+      } = res
       if (sign) {
-        const { firstKey } = this.data
+        const {
+          firstKey
+        } = this.data
         const encrypted = AES.encrypt(_openid, firstKey)
         const hash = MD5(encrypted)
         if (hash === sign) {
@@ -280,23 +384,40 @@ Page({
     })
   },
   onButtonTap() {
-    const {  mode } = this.data
-    const { firstKey, secondKey } = this.data
+    const {
+      mode
+    } = this.data
+    const {
+      firstKey,
+      secondKey
+    } = this.data
     if (!firstKey) {
-      return wx.showToast({ title: '请输入主密码', icon: 'none' })
+      return wx.showToast({
+        title: '请输入主密码',
+        icon: 'none'
+      })
     }
     if (firstKey.length < 6) {
-      return wx.showToast({ title: '主密码不应该少于6位', icon: 'none' })
+      return wx.showToast({
+        title: '主密码不应该少于6位',
+        icon: 'none'
+      })
     }
 
     if (mode === 'set') {
       this.setKey()
     } else if (mode === 'change') {
       if (!secondKey) {
-        return wx.showToast({ title: '请输入新密码', icon: 'none'})
+        return wx.showToast({
+          title: '请输入新密码',
+          icon: 'none'
+        })
       }
       if (secondKey.length < 6) {
-        return wx.showToast({ title: '新密码不应少于6位', icon: 'none' })
+        return wx.showToast({
+          title: '新密码不应少于6位',
+          icon: 'none'
+        })
       }
       this.resetKey()
     } else if (mode === 'confirm') {

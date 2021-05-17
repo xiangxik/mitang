@@ -1,22 +1,19 @@
 <view class="header">
-	<view id="header-item-1" class="header-item {{ dataType === 0 ? 'active' : '' }}" data-type="{{ 0 }}" bindtap="onSwitch">云端</view>
-	<view id="header-item-2" class="header-item ml-36 {{ dataType === 1 ? 'active' : '' }}" data-type="{{ 1 }}" bindtap="onSwitch">本地</view>
+	<view id="header-item-1" class="header-item {{ dataType === 0 ? 'active' : '' }}" data-type="{{ 0 }}"
+		bindtap="onSwitch">云端</view>
+	<view id="header-item-2" class="header-item ml-36 {{ dataType === 1 ? 'active' : '' }}" data-type="{{ 1 }}"
+		bindtap="onSwitch">本地</view>
 	<view class="underline" wx:if="{{ initedUnderline }}" style="left: {{ underlineLeft }}px"></view>
 </view>
 <swiper class="swiper" current="{{ currentSwiperItem }}" bindchange="onSwiperChange" duration="{{ 250 }}">
 	<swiper-item>
-		<scroll-view class="scroll-wrapper" scroll-y="{{ true }}" refresher-enabled 
-		refresher-triggered="{{ cloudRefresherTriggered }}"
-		bindrefresherrefresh="onScrollCloudRefresh">
+		<scroll-view class="scroll-wrapper" scroll-y="{{ true }}" refresher-enabled
+			refresher-triggered="{{ cloudRefresherTriggered }}" bindrefresherrefresh="onScrollCloudRefresh">
 			<view class="pb-32" wx:if="{{ cloudList.length > 0 }}">
 				<cells ext-class="cells">
-						<cell link first
-						wx:for="{{ cloudList }}" wx:key="account"
-						value="{{ item.name }}"
-						icon="{{ item.icon }}"
-						url="{{ item.url }}"
-						footer="{{ item.total }}"></cell>
-				</cells>			
+					<cell link first wx:for="{{ cloudList }}" wx:key="account" value="{{ item.name }}" icon="{{ item.icon }}"
+						url="{{ item.url }}" footer="{{ item.total }}"></cell>
+				</cells>
 			</view>
 			<view class="footer pt-20 pb-12" wx:if="{{ cloudList.length === 0 && cloudListInited }}">
 				<text>暂无账号</text>
@@ -31,13 +28,8 @@
 		<scroll-view class="scroll-wrapper" scroll-y="{{ true }}">
 			<view class="pb-32" wx:if="{{ localList.length > 0 }}">
 				<cells ext-class="cells">
-						<cell link first
-							wx:for="{{ localList }}"
-							wx:key="account"
-						 	value="{{ item.name }}"
-							icon="{{ item.icon }}"
-							url="{{ item.url }}"
-							footer="{{ item.total }}"></cell>
+					<cell link first wx:for="{{ localList }}" wx:key="account" value="{{ item.name }}" icon="{{ item.icon }}"
+						url="{{ item.url }}" footer="{{ item.total }}"></cell>
 				</cells>
 			</view>
 			<view class="footer pt-20 pb-12" wx:if="{{ localList.length === 0 && localListInited }}">
@@ -51,14 +43,10 @@
 	</swiper-item>
 </swiper>
 
-<private-key
-  show="{{ showKeyDialog }}"
-	type="{{ keyDialogType }}"
-	callback="{{ keyDialogCallback }}"
- 	bindconfirm="onKeyDialogConfirm"></private-key>
+<private-key show="{{ showKeyDialog }}" type="{{ keyDialogType }}" callback="{{ keyDialogCallback }}"
+	bindconfirm="onKeyDialogConfirm"></private-key>
 
-<access-dialog show="{{ showAccessDialog }}"
-	bindconfirm="onAccessDialogComfirm"></access-dialog>
+<access-dialog show="{{ showAccessDialog }}" bindconfirm="onAccessDialogComfirm"></access-dialog>
 
 <view class="main-key-box" wx:if="{{ !keyPass }}">
 	<view class="button-box">
@@ -66,4 +54,3 @@
 		<button class="mt-32" bindtap="onProtocolTap">用户协议和说明</button>
 	</view>
 </view>
-

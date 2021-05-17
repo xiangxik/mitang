@@ -2,33 +2,21 @@
    <cells>
       <cell title="{{ firstKeyTitle }}">
          <view class="input-box">
-            <input class="key" placeholder="{{ firstKeyPlaceholder }}"
-               bindinput="onInput"
-               type="password"
-               value="{{ firstKey }}"
-               wx:if="{{ hide }}"></input>
-            <input wx:else class="key" placeholder="请输入主密码"
-               bindinput="onInput"
-               type="text"
+            <input class="key" placeholder="{{ firstKeyPlaceholder }}" bindinput="onInput" type="password"
+               value="{{ firstKey }}" wx:if="{{ hide }}"></input>
+            <input wx:else class="key" placeholder="请输入主密码" bindinput="onInput" type="text"
                value="{{ firstKey }}"></input>
-            <image class="icon"
-               src="{{ hide ? '/images/icon_hide.png' : '/images/icon_browse.png' }}"
+            <image class="icon" src="{{ hide ? '/images/icon_hide.png' : '/images/icon_browse.png' }}"
                bindtap="onIconTap"></image>
          </view>
       </cell>
       <cell title="{{ secondKeyTitle }}" wx:if="{{ mode === 'change' }}">
          <view class="input-box">
-            <input class="key" placeholder="{{ secondKeyPlaceholder }}"
-               bindinput="onSecondKeyInput"
-               type="password"
-               value="{{ secondKey }}"
-               wx:if="{{ secondKeyHide }}"></input>
-            <input wx:else class="key" placeholder="{{ secondKeyPlaceholder }}"
-               bindinput="onSecondKeyInput"
-               type="text"
+            <input class="key" placeholder="{{ secondKeyPlaceholder }}" bindinput="onSecondKeyInput" type="password"
+               value="{{ secondKey }}" wx:if="{{ secondKeyHide }}"></input>
+            <input wx:else class="key" placeholder="{{ secondKeyPlaceholder }}" bindinput="onSecondKeyInput" type="text"
                value="{{ secondKey }}"></input>
-            <image class="icon"
-               src="{{ secondKeyHide ? '/images/icon_hide.png' : '/images/icon_browse.png' }}"
+            <image class="icon" src="{{ secondKeyHide ? '/images/icon_hide.png' : '/images/icon_browse.png' }}"
                bindtap="onSecondKeyIconTap"></image>
          </view>
       </cell>

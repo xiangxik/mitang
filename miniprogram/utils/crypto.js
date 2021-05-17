@@ -30,7 +30,7 @@ const formatKey = (key) => {
 /* data 需要加密的数据
  * key 密钥
  * type 加密类型 AES/SM4
-*/
+ */
 const encrypt = (data, key, type = 'SM4') => {
   if (type === 'SM4') {
     return SM4.encrypt(data, formatKey(key))
@@ -43,7 +43,7 @@ const encrypt = (data, key, type = 'SM4') => {
 /* data需要加密的数据
  * key 密钥
  * type 加密类型 AES/SM4
-*/
+ */
 const decrypt = (data, key, type = 'SM4') => {
   if (type === 'SM4') {
     return SM4.decrypt(data, formatKey(key))

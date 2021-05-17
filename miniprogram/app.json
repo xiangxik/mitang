@@ -36,8 +36,7 @@
     "color": "#4c4c4c",
     "selectedColor": "#07c160",
     "backgroundColor": "#ffffff",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "iconPath": "/images/icon_home.png",
         "selectedIconPath": "/images/icon_home_primary.png",

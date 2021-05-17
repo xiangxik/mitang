@@ -1,7 +1,7 @@
 export const group = (list, count = 3) => {
   const res = []
-  for(let i = 0; i < list.length; i += count) {
-    res.push(list.slice(i, i +count))
+  for (let i = 0; i < list.length; i += count) {
+    res.push(list.slice(i, i + count))
   }
   return res
 }

@@ -1,5 +1,4 @@
-export default [
-  {
+export default [{
     name: '默认',
     icon: '/images/icon_default.png',
   },
