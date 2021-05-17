@@ -1,2 +1,2 @@
 # mitang
-MiTang WeChat Miniprogram
+密塘 - 微信小程序源码
